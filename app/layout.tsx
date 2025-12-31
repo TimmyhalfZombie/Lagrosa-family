@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         siteName: "Lagrosa Family",
         images: [
             {
-                url: "/opengraph-image.png",
+                url: "https://lagrosafamily.onrender.com/opengraph-image.png",
                 width: 1200,
                 height: 630,
             }
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Lagrosa Family sent you a special surprise message 💌. Open it",
         description: "Happy New Year 2026! Tap to view your surprise.",
-        images: ["/opengraph-image.png"],
+        images: ["https://lagrosafamily.onrender.com/opengraph-image.png"],
     },
 };
 
