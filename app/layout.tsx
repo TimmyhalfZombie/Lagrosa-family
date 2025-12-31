@@ -20,8 +20,6 @@ export const metadata: Metadata = {
         images: [
             {
                 url: "https://lagrosafamily.onrender.com/opengraph-image.png",
-                width: 1200,
-                height: 630,
             }
         ],
         type: "website",
