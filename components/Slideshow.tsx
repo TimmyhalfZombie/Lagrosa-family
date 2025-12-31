@@ -3,11 +3,16 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { getGalleryImages } from "@/app/actions/getGalleryImages";
+
+const GALLERY_IMAGES = [
+    "/gallery/4.png", "/gallery/5.png", "/gallery/6.png", "/gallery/7.png", "/gallery/8.png",
+    "/gallery/9.png", "/gallery/10.png", "/gallery/11.png", "/gallery/12.png", "/gallery/13.png",
+    "/gallery/14.png", "/gallery/15.png", "/gallery/16.png", "/gallery/17.png", "/gallery/18.png",
+    "/gallery/19.png", "/gallery/20.png", "/gallery/21.png", "/gallery/22.png"
+];
 
 export default function Slideshow() {
-    const [images, setImages] = useState<string[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [images] = useState<string[]>(GALLERY_IMAGES);
     const [current, setCurrent] = useState(0);
     const [direction, setDirection] = useState(0);
 
@@ -29,19 +34,14 @@ export default function Slideshow() {
         })
     };
 
+    // Auto-slide effect
     useEffect(() => {
-        const fetchImages = async () => {
-            try {
-                const imgs = await getGalleryImages();
-                setImages(imgs);
-            } catch (error) {
-                console.error("Failed to load images", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchImages();
-    }, []);
+        const timer = setInterval(() => {
+            setDirection(1);
+            setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+        }, 3000);
+        return () => clearInterval(timer);
+    }, [images]);
 
     const nextSlide = () => {
         setDirection(1);
@@ -53,14 +53,6 @@ export default function Slideshow() {
         setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1));
     };
 
-    useEffect(() => {
-        if (images.length === 0) return;
-        const timer = setInterval(nextSlide, 3000);
-        return () => clearInterval(timer);
-    }, [images]);
-
-    if (loading) return null;
-    if (images.length === 0) return null;
 
     return (
         <section className="w-full max-w-5xl mx-auto py-20 px-4">
