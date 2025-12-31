@@ -9,8 +9,14 @@ const cinzel = Cinzel({ subsets: ["latin"], variable: "--font-cinzel" });
 const greatVibes = Great_Vibes({ weight: "400", subsets: ["latin"], variable: "--font-great-vibes" });
 
 export const metadata: Metadata = {
+    metadataBase: new URL("https://lagrosafamily.onrender.com/"), // Update this with your actual Render URL!
     title: "Lagrosa Family",
-    description: "A magical New Year celebration",
+    description: "sent you a special surprise message 💌. Open it",
+    openGraph: {
+        title: "Lagrosa Family sent you a special surprise message 💌. Open it",
+        description: "Happy New Year 2026! Tap to view your surprise.",
+        images: ["/opengraph-image.png"],
+    },
 };
 
 export default function RootLayout({

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 const GALLERY_IMAGES = [
     "/gallery/4.png", "/gallery/5.png", "/gallery/6.png", "/gallery/7.png", "/gallery/8.png",
@@ -15,6 +15,7 @@ export default function Slideshow() {
     const [images] = useState<string[]>(GALLERY_IMAGES);
     const [current, setCurrent] = useState(0);
     const [direction, setDirection] = useState(0);
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
     const variants = {
         enter: (direction: number) => ({
@@ -83,7 +84,8 @@ export default function Slideshow() {
                         <img
                             src={images[current]}
                             alt={`Slide ${current + 1}`}
-                            className="w-full h-full object-contain drop-shadow-2xl"
+                            className="w-full h-full object-contain drop-shadow-2xl cursor-pointer"
+                            onClick={() => setSelectedImage(images[current])}
                         />
                     </motion.div>
                 </AnimatePresence>
@@ -127,6 +129,35 @@ export default function Slideshow() {
                     2 Corinthians 5:7
                 </p>
             </div>
+
+            {/* Full Screen Modal */}
+            <AnimatePresence>
+                {selectedImage && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
+                        onClick={() => setSelectedImage(null)}
+                    >
+                        <button
+                            className="absolute top-4 right-4 text-white p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors z-50"
+                            onClick={() => setSelectedImage(null)}
+                        >
+                            <X size={40} />
+                        </button>
+                        <motion.img
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            src={selectedImage}
+                            alt="Full view"
+                            className="max-w-full max-h-full object-contain select-none"
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 }
