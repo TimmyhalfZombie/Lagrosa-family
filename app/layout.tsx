@@ -11,9 +11,9 @@ const greatVibes = Great_Vibes({ weight: "400", subsets: ["latin"], variable: "-
 export const metadata: Metadata = {
     metadataBase: new URL("https://lagrosafamily.onrender.com/"),
     title: "Lagrosa Family",
-    description: "sent you a special surprise message 💌. Open it",
+    description: "sent you a special message 💌. Open it!",
     openGraph: {
-        title: "Lagrosa Family sent you a special surprise message 💌. Open it",
+        title: "Lagrosa Family sent you a special message 💌. Open it!",
         description: "Happy New Year 2026! Tap to view your surprise.",
         url: "https://lagrosafamily.onrender.com/",
         siteName: "Lagrosa Family",
